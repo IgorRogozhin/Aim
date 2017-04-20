@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Aim</display-name>
+  <listener>
+    <listener-class>
+    ru.aim.dbhelpers.DBManagerSetup
+  </listener-class>
+  </listener>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <context-param>
+    <param-name>defaultWebBase</param-name>
+    <param-value>/Aim</param-value>
+  </context-param>
+  <context-param>
+    <param-name>baseURL</param-name>
+    <param-value>http://localhost:8080/Aim</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbuserid</param-name>
+    <param-value>dbuser</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbuserpwd</param-name>
+    <param-value>dbuser</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbinitcat</param-name>
+    <param-value>Aim</param-value>
+  </context-param>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/errorHandler.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/errorHandler.jsp</location>
+  </error-page>
+</web-app>
