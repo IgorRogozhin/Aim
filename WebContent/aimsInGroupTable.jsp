@@ -5,12 +5,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/jquery-ui/jquery-ui.css"/>
+<link rel="stylesheet" href="css/styles.css"/>
+<script src="scripts/jquery.js"></script>
+<script src="scripts/jquery-ui.js"></script>
+<script src="scripts/script.js"></script>
 <title>Reach your aim</title>
 </head>
 <body>
 	<c:choose>
 		<c:when test="${sessionScope.userAimGroupData ne null}">
-		<br><table border=1> 
+		<div class="commonStyleOfTables">
+		<table id="groupDeadlineTable"> 
+			<thead id="headerTest" style="text-align: left">
 					<tr>
 						<td>Группа</td>
 						<td>Кто поставил</td>
@@ -19,6 +26,7 @@
 						<td>Проверка</td>
 						<td>Дата окончания</td>
 					</tr>
+			</thead>
 		<c:forEach var="data" items="${sessionScope.userAimGroupData}">
 			<!-- Iterating over data for current WebUser to retrieve actual aims-->
 			<c:forEach var="group" items="${data}">
@@ -35,8 +43,9 @@
 			</c:forEach>
 		</c:forEach>	
 			</table>
+			</div>
 		</c:when>
-		<c:otherwise>У вас нет групп, для получения данных</c:otherwise>
+		<c:otherwise><h3 class="attention">У вас нет групп, для получения данных</h3></c:otherwise>
 	</c:choose>	
 </body>
 </html>

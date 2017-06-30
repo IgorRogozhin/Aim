@@ -1,0 +1,8 @@
+
+
+
+$(function() {
+	alert("Test");
+});
+
+

@@ -5,28 +5,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/jquery-ui/jquery-ui.css"/>
+<script src="scripts/jquery.js"></script>
+<script src="scripts/jquery-ui.js"></script>
+<script src="scripts/script.js"></script>
 <title>Reach your aim</title>
 </head>
 <body>
-<br>
 <c:choose>
 	<c:when test="${pageContext.request.contextPath eq initParam.defaultWebBase}">
 		<!-- use base links -->
 		<ul style="list-style-type:none; padding:0px; margin:0px 0px 0px 0px;">
-			<li id="aimLink"><a href="${initParam.baseURL}/Protected/aim.jsp">Задачи</a></li>
-			<li id="groupLink"><a href="${initParam.baseURL}/Protected/group.jsp">Группы</a></li>
-			<li id="signoutLink"><a href="${initParam.baseURL}/invalidatesessionandremovecookies.do">Выйти</a></li>
+			<li id="aimLink" class="link"><a href="${initParam.baseURL}/Protected/aim.jsp">Задачи</a></li>
+			<li id="groupLink" class="link"><a href="${initParam.baseURL}/Protected/group.jsp">Группы</a></li>
+			<li id="signoutLink" class="link"><a href="${initParam.baseURL}/invalidatesessionandremovecookies.do">Выйти</a></li>
 		</ul>
 	</c:when>
 	<c:otherwise>
 		<!-- rely on context -->
 		<ul style="list-style-type:none; padding:0px; margin:0px 0px 0px 0px;">
-			<li id="aimLink"><a href="${pageContext.request.contextPath}/Protected/aim.jsp">Задачи</a></li>
-			<li id="groupLink"><a href="${pageContext.request.contextPath}/Protected/group.jsp">Группы</a></li>
-			<li id="signoutLink"><a href="${pageContext.request.contextPath}/invalidatesessionandremovecookies.do">Выйти</a></li>
+			<li id="aimLink1" class="link"><a href="${pageContext.request.contextPath}/Protected/aim.jsp">Задачи</a></li>
+			<li id="groupLink1" class="link"><a href="${pageContext.request.contextPath}/Protected/group.jsp">Группы</a></li>
+			<li id="signoutLink1" class="link"><a href="${pageContext.request.contextPath}/invalidatesessionandremovecookies.do">Выйти</a></li>
 		</ul>
 	</c:otherwise>
 </c:choose>
-<br>
 </body>
 </html>

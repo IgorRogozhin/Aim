@@ -75,7 +75,7 @@ public class AddGroup extends HttpServlet {
 				HttpSession s = request.getSession();
 				s.setAttribute("groupData", groupsOfUser);
 				
-				String congrats = String.format("Поздравляю, вы создали  группу \"%s\"!", name);
+				String congrats = String.format("Поздравляю, вы создали группу \"%s\"!", name);
 				request.setAttribute("success", congrats);
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/Protected/updateSessionData.do");
 				rd.forward(request, response);
