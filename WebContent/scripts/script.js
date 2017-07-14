@@ -1,4 +1,3 @@
-
 //Calendar
 $(function() {
 	$("#start-date").datepicker({
@@ -58,6 +57,8 @@ $(function() {
 	$("#wrongRepeatedPwd").addClass("attention");
 	$("#emptyFields").addClass("attention");
 	$("#signoutButton").button();
+	$("#tempoMessage").hide();
+
 });
 
 $(function() {
@@ -90,3 +91,94 @@ RegUtils.checkCorrectness = function() {
 	}
 	return true;
 }
+
+// Failed, delete, achieved buttons
+$(function() {
+	$("#deadlineTable tr").mouseover(function() {
+		$(this).addClass("active");
+	});
+	$("#deadlineTable tr").mouseout(function() {
+		$(this).removeClass("active");
+	});
+
+	$(".passive .toServer #failedButt").click(function() {
+		// Failed aim
+		var userId = $(".active .toServer #id").val();
+		var nameOfAim = $(".active .toServer #nameOfAim").val();
+		var description = $(".active .toServer #description").val();
+		$.ajax({
+			url : '../Protected/failedAim.do',
+			data : {
+				userId : userId,
+				nameOfAim : nameOfAim,
+				description : description
+			},
+			success : function(responseText) {
+				RegUtils.actions(responseText, nameOfAim);
+			}
+		});
+	});
+	// Delete aim
+	$(".passive .toServer #deleteButt").click(function() {
+		var userId = $(".active .toServer #id").val();
+		var nameOfAim = $(".active .toServer #nameOfAim").val();
+		var description = $(".active .toServer #description").val();
+		$.ajax({
+			url : '../Protected/deleteAim.do',
+			data : {
+				userId : userId,
+				nameOfAim : nameOfAim,
+				description : description
+			},
+			success : function(responseText) {
+				RegUtils.actions(responseText, nameOfAim);
+			}
+		});
+	});
+	// Achieved aim
+	$(".passive .toServer #doneButt").click(function() {
+		var userId = $(".active .toServer #id").val();
+		var nameOfAim = $(".active .toServer #nameOfAim").val();
+		var description = $(".active .toServer #description").val();
+		$.ajax({
+			url : '../Protected/doneAim.do',
+			data : {
+				userId : userId,
+				nameOfAim : nameOfAim,
+				description : description
+			},
+			success : function(responseText) {
+				RegUtils.actions(responseText, nameOfAim);
+			}
+		});
+	});
+});
+
+RegUtils.actions = function(fromServer, nameOfAim) {
+	if (fromServer == "failed") {
+		$(".active").hide();
+		$("#tempoMessage").text(
+				"Не удалось справиться с задачей '" + nameOfAim + "'? "
+						+ "Bремя сосредоточиться на следующей!").show(
+				"highlight", {
+					color : "#758bc6"
+				}, 1000);
+		$("#tempoMessage").addClass("attention");
+	} else if (fromServer == "deleted") {
+		$(".active").hide();
+		$("#tempoMessage").text("Задача '" + nameOfAim + "' удалена").show(
+				"highlight", {
+					color : "#758bc6"
+				}, 1000);
+		$("#tempoMessage").addClass("success");
+	} else if (fromServer == "done") {
+		$(".active").hide();
+		$("#tempoMessage").text(
+				"Задача '" + nameOfAim + "' успешно выполнена, вы молодец!")
+				.show("highlight", {
+					color : "#758bc6"
+				}, 1000);
+		$("#tempoMessage").addClass("success");
+	}
+
+};

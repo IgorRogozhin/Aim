@@ -21,84 +21,79 @@ import ru.aim.models.WebCollector;
 import ru.aim.models.WebGroup;
 import ru.aim.models.WebUser;
 
-
 /**
  * Servlet implementation class DeleteAim
  */
 @WebServlet("/Protected/deleteAim.do")
 public class DeleteAim extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteAim() {
-        super();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public DeleteAim() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//add an aim
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		request.setCharacterEncoding("UTF-8");
-	
+
 		int userId = Integer.parseInt(request.getParameter("userId"));
 		String name = request.getParameter("nameOfAim");
 		String description = request.getParameter("description");
-								
+
 		String baseURL = getServletContext().getInitParameter("baseURL");
-		
-		try
-		{
-			
-			if (getServletContext().getAttribute("AimDBManager") != null)
-			{
-				DBManager dbm = (DBManager)getServletContext().getAttribute("AimDBManager");
+
+		try {
+			if (getServletContext().getAttribute("AimDBManager") != null) {
+				DBManager dbm = (DBManager) getServletContext().getAttribute("AimDBManager");
 				WebAimManager wam = new WebAimManager();
-				
+
 				boolean aimDeleted = wam.deleteAim(dbm, userId, name, description);
-				if( !aimDeleted ) {
+				if (!aimDeleted) {
 					String congrats = String.format("Задача %s не хочет удаляться!", name);
 					request.setAttribute("success", congrats);
 					RequestDispatcher rd = getServletContext().getRequestDispatcher("/Protected/Cabinet.jsp");
 					rd.forward(request, response);
-					return;		
+					return;
 				}
-				
-				//now because we have modeled correctly, we can easily refresh data here, 
-				//rather than redirecting around to do so!
+
+				// now because we have modeled correctly, we can easily refresh
+				// data here,
+				// rather than redirecting around to do so!
 				ArrayList<WebAim> allAims = wam.getUserAimsByDeadline(dbm, userId);
-				
-				//make the aim data fresh
+
+				// make the aim data fresh
 				HttpSession s = request.getSession();
 				s.setAttribute("aimData", allAims);
-				
-						
-				String congrats = String.format("Задача '%s' удалена!", name);
-				request.setAttribute("success", congrats);
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/Protected/Cabinet.jsp");
-				rd.forward(request, response);
-				return;		
-				
-			}
-			else
-			{
-				//log it... and throw new Exception ("No database connection.");
+
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("deleted");
+				return;
+
+			} else {
+				// log it... and throw new Exception ("No database
+				// connection.");
 				response.sendRedirect(baseURL + "/errorHandler.jsp");
 			}
-		}
-		catch (Exception ex)
-		{
-			//log it.
+		} catch (Exception ex) {
+			// log it.
 			response.sendRedirect(baseURL + "/errorHandler.jsp");
 		}
 	}

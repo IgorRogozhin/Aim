@@ -25,6 +25,7 @@
 							<td>Описание</td>
 							<td>Проверка</td>
 							<td>Дата окончания</td>
+							<td>Итог</td>
 						</tr>
 					</thead>
 					<c:forEach var="data" items="${sessionScope.userAimGroupData}">
@@ -38,6 +39,10 @@
 									<td>${group.webAim.description}</td>
 									<td>${group.webAim.control}</td>
 									<td>${group.webAim.deadline}</td>
+									<td><c:choose>
+											<c:when test="${group.webAim.result}">Выполнено</c:when>
+											<c:otherwise>Не получилось</c:otherwise>
+										</c:choose></td>
 								</tr>
 							</c:if>
 						</c:forEach>

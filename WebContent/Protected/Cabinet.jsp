@@ -14,12 +14,11 @@
 </head>
 <body>
 	<c:import url="../motivation.jsp"></c:import>
-	
 	<c:if test="${requestScope.success ne null}"><h2 class="success">${requestScope.success}</h2></c:if>
-	
 	<h3 class="cabinet">Кабинет</h3>
 	<c:import url="../navbar.jsp"></c:import>
 	<h3 id="nameOfTable"><c:out value="Твои текущие задачи"></c:out></h3>
+	<div id="tempoMessage"></div> <br>
 	<c:choose>
 		<c:when test="${sessionScope.aimData ne null}">
 			<c:import url="../aimsByDeadlineTable.jsp"></c:import>

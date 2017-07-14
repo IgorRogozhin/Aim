@@ -142,7 +142,8 @@ public class WebAimManager implements Serializable {
 				aim.setName(rs.getString("name"));
 				aim.setDescription(rs.getString("description"));
 				aim.setControl(rs.getString("control"));
-
+				aim.setResult(rs.getBoolean("result"));
+				
 				LocalDate deadline = null;
 
 				try {
@@ -226,6 +227,38 @@ public class WebAimManager implements Serializable {
 	}
 
 	/**
+	 * Marks a WebAim as done, i.e. WebAim attribute "archive" is set to
+	 * <b>true</b>, WebUser attribute "failed" is incremented by 1
+	 * 
+	 * @param dbm
+	 * @param userId
+	 * @param name
+	 * @param description
+	 * @return boolean
+	 */
+	public boolean markAsFailed(DBManager dbm, int userId, String nameOfAim, String description) {
+
+		if (!checkForConnection(dbm)) {
+			return false;
+		}
+
+		String query = DBAimQueries.markAsArchived(userId, nameOfAim, description);
+		String query_two = DBAimQueries.markAsFailed(userId);
+
+		try {
+			dbm.ExecuteNonQuery(query);
+			dbm.ExecuteNonQuery(query_two);
+		}
+
+		catch (Exception ex) {
+			// log it
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Common method to check connection with DB, returns <b>true</b> if connect
 	 * is OK
 	 * 
@@ -280,7 +313,6 @@ public class WebAimManager implements Serializable {
 				aim.setResult(rs.getBoolean("result"));
 
 				LocalDate deadline = null;
-
 				try {
 					deadline = rs.getObject("deadline", LocalDate.class);
 				} catch (Exception e) {
@@ -348,4 +380,5 @@ public class WebAimManager implements Serializable {
 		}
 		return aim;
 	}
+
 }
