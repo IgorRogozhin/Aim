@@ -5,19 +5,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../css/jquery-ui/jquery-ui.css"/>
+<link rel="stylesheet" href="../css/styles.css"/>
+<script src="../scripts/jquery.js"></script>
+<script src="../scripts/jquery-ui.js"></script>
+<script src="../scripts/script.js"></script>
 <title>Reach your aim</title>
 </head>
 <body>
 	<c:import url="../motivation.jsp"></c:import>
 	<c:import url="../navbarAim.jsp"></c:import>
 	
-	<br><h3><c:out value="Твои текущие задачи"></c:out></h3>
+	<br><h3 id="nameOfTable"><c:out value="Твои текущие задачи"></c:out></h3>
 	
 	<c:choose>
 		<c:when test="${sessionScope.aimData ne null}">
 			<c:import url="../aimsByDeadlineTable.jsp"></c:import>
 		</c:when>
-		<c:otherwise><br><h3>Здесь будут ваши текущие задачи, если вы их перед собой поставите</h3></c:otherwise>
+		<c:otherwise><br><h3 class="styleNameOfTable">Здесь будут ваши текущие задачи, если вы их перед собой поставите</h3></c:otherwise>
 	</c:choose>
 	
 </body>

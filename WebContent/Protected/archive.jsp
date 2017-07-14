@@ -5,19 +5,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../css/jquery-ui/jquery-ui.css"/>
+<link rel="stylesheet" href="../css/styles.css"/>
+<script src="../scripts/jquery.js"></script>
+<script src="../scripts/jquery-ui.js"></script>
+<script src="../scripts/script.js"></script>
 <title>Reach your aim</title>
 </head>
 <body>
 	<c:import url="../motivation.jsp"></c:import>
-	<a href="${initParam.baseURL}/Protected/aim.jsp">Назад</a>
-	
-	<br><h3><c:out value="История твоей целеустремлённости"></c:out></h3>
+	<c:import url="../navbar.jsp"></c:import>
+	<h3 id="nameOfTable"><c:out value="История твоей целеустремлённости"></c:out></h3>
 		
 	<c:choose>
 		<c:when test="${sessionScope.archiveAimData ne null}">
 			<c:import url="../aimsFromArchiveTable.jsp"></c:import>
 		</c:when>
-		<c:otherwise><br><h3>Здесь будет ваша история, если конечно будет</h3></c:otherwise>
+		<c:otherwise><br><h3 class="attention">Здесь будет ваша история, если конечно будет</h3></c:otherwise>
 	</c:choose>
 </body>
 </html>

@@ -5,20 +5,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../css/jquery-ui/jquery-ui.css" />
+<link rel="stylesheet" href="../css/styles.css" />
+<script src="../scripts/jquery.js"></script>
+<script src="../scripts/jquery-ui.js"></script>
+<script src="../scripts/script.js"></script>
 <title>Reach your aim</title>
 </head>
 <body>
 	<c:import url="../motivation.jsp"></c:import>
-	<c:import url="../navbarGroup.jsp"></c:import>
-
+	<c:import url="../navbar.jsp"></c:import>
+	<h3 id="nameOfTable"><c:out value="Какае группы вы хотите покинуть?"></c:out></h3>
 	<form action="${pageContext.request.contextPath}/Protected/signoutGroup.do" method="post">
 			
 		<c:choose>
 			<c:when test="${sessionScope.groupData ne null}">
-				<table border=1> 
+				<table border=1 id="signoutGroupTable"  class="commonStyleOfTables"> 
 				<tr>
 					<td>
-						Какае группы вы хотите покинуть? 
 						<br> Учтите, покинуть можно только группы к которым вы присоединялись.
 						<br> Если вы создавали группу, то её можно только удалить.
 					</td>
@@ -37,8 +41,8 @@
 					<td>
 							<input type="hidden" name="userId" value="${sessionScope.authorized_user.id}" />
 					</td>
-					<td colspan="2" align="right">
-						<input type="submit" name="addAim" value="Покинуть" style="width:100px;"/>
+					<td colspan="2">
+						<input type="submit" name="addAim" value="Покинуть" id="signoutButton"/>
 					</td>
 				</tr>
 				</table>	 	 

@@ -72,7 +72,7 @@ public class RegistrationUser extends HttpServlet {
 				if (wu == null)
 				{
 					s.setAttribute("wrongName", login);
-					response.sendRedirect(baseURL + "/registration.jsp");
+					response.sendRedirect(baseURL + "/index.jsp");
 					return;
 				}
 				s.setAttribute("authorized_user", wu);
@@ -94,7 +94,7 @@ public class RegistrationUser extends HttpServlet {
 		if (wum.userIsValid(wu)) {
 			 destination = (baseURL + "/Protected/Cabinet.jsp");
 		} else {
-			destination = (baseURL + "/registration.jsp");
+			destination = (baseURL + "/index.jsp");
 		}
 		
 		response.sendRedirect(destination);

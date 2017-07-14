@@ -7,9 +7,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/jquery-ui/jquery-ui.css"/>
+<link rel="stylesheet" href="css/styles.css"/>
+<script src="scripts/jquery.js"></script>
+<script src="scripts/jquery-ui.js"></script>
+<script src="scripts/script.js"></script>
 <title>Reach your aim</title>
 </head>
+
 <body>
-	<h1><c:out value="${sessionScope.authorized_user.userId}" default="Незнакомец"/>, добивайся поставленной цели!</h1>
+	<h1><span id="userName">
+	<c:out value="${sessionScope.authorized_user.userId}" default="Незнакомец"/></span>
+	<span id="moto">, добивайся поставленной цели!</span></h1>
 </body>
 </html>

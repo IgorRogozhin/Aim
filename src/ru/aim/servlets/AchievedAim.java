@@ -85,7 +85,7 @@ public class AchievedAim extends HttpServlet {
 				//response.sendRedirect(baseURL + "/Protected/aim.jsp");
 				String congrats = String.format("Поздравляю, вы смогли успешно завершить \"%s\"!", name);
 				request.setAttribute("success", congrats);
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/Protected/Cabinet.jsp");
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/Protected/updateSessionData.do");
 				rd.forward(request, response);
 				return;
 				

@@ -5,6 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../css/jquery-ui/jquery-ui.css" />
+<link rel="stylesheet" href="../css/styles.css" />
+<script src="../scripts/jquery.js"></script>
+<script src="../scripts/jquery-ui.js"></script>
+<script src="../scripts/script.js"></script>
 <title>Reach your aim</title>
 </head>
 <body>
@@ -12,12 +17,12 @@
 	<c:import url="../navbar.jsp"></c:import>
 	
 	<c:if test="${requestScope.occupiedGroupName ne null}">
-		<h2>Группа "${requestScope.occupiedGroupName}" уже существует, попробуй что-то более свежее</h2>
+		<h2 class="attention">Группа "${requestScope.occupiedGroupName}" уже существует, попробуй что-то более свежее</h2>
 	</c:if>
 	
 	<form action="${initParam.baseURL}/Protected/addNewGroup.do" method="post">
 	
-				<table border=1> 
+				<table border=1 id="createGroupTable"  class="commonStyleOfTables"> 
 					
 					<tr>
 						<td>Введите имя группы</td>
@@ -40,7 +45,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="right">
-							<input type="submit" name="addcity" value="Создать группу" style="width:200px;"/>
+							<input type="submit" name="addcity" value="Создать группу" class="button"/>
 						</td>
 					</tr>
 				</table>

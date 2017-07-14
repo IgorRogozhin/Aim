@@ -12,26 +12,26 @@
 <c:choose>
 	<c:when test="${pageContext.request.contextPath eq initParam.defaultWebBase}">
 		<!-- context is good -->
-		<ul style="list-style-type:none; padding:0px; margin:0px 0px 0px 0px;">
-			<li id="addLink"><a href="${initParam.baseURL}/Protected/addGroup.jsp">Создать группу</a></li>
-			<li id="joinLink"><a href="${initParam.baseURL}/Protected/joinGroup.jsp">Присоединиться к группе</a></li>
-			<li id="signoutLink"><a href="${initParam.baseURL}/Protected/signoutGroup.jsp">Выйти из группы</a></li>
-			<li id="archiveLink"><a href="${initParam.baseURL}/Protected/archiveGroup.jsp">Архив групп</a></li>
-			<li id="deleteLink"><a href="${initParam.baseURL}/Protected/deleteGroup.jsp">Удалить группы</a></li>
-			<li id="rateLink"><a href="${initParam.baseURL}/rateTable.jsp">Рейтинг</a></li>
-			<li id="backLink"><a href="${pageContext.request.contextPath}/Protected/Cabinet.jsp">Кабинет</a></li>
+		<ul class="zeroStyle">
+			<li id="addLink" class="link"><a href="${initParam.baseURL}/Protected/addGroup.jsp">Создать группу</a></li>
+			<li id="joinLink" class="link"><a href="${initParam.baseURL}/Protected/joinGroup.jsp">Присоединиться</a></li>
+			<li id="signoutLink" class="link"><a href="${initParam.baseURL}/Protected/signoutGroup.jsp">Выйти из группы</a></li>
+			<li id="archiveLink" class="link"><a href="${initParam.baseURL}/Protected/archiveGroup.jsp">Архив групп</a></li>
+			<li id="deleteLink" class="link"><a href="${initParam.baseURL}/Protected/deleteGroup.jsp">Удалить группы</a></li>
+			<li id="rateLink" class="link"><a href="${initParam.baseURL}/rateTable.jsp">Рейтинг</a></li>
+			<li id="backLink" class="link"><a href="${pageContext.request.contextPath}/Protected/Cabinet.jsp">Кабинет</a></li>
 		</ul>
 	</c:when>
 	<c:otherwise>
 		<!-- use base links -->
-		<ul style="list-style-type:none; padding:0px; margin:0px 0px 0px 0px;">
-			<li id="addLink"><a href="${pageContext.request.contextPath}/Protected/addGroup.jsp">Создать группу</a></li>
-			<li id="joinLink"><a href="${pageContext.request.contextPath}/Protected/joinGroup.jsp">Присоединиться к группе</a></li>
-			<li id="signoutLink"><a href="${pageContext.request.contextPath}/Protected/signoutGroup.jsp">Выйти из групп</a></li>
-			<li id="archiveLink"><a href="${pageContext.request.contextPath}/Protected/archiveGroup.jsp">Архив группы</a></li>
-			<li id="deleteLink"><a href="${pageContext.request.contextPath}/Protected/deleteGroup.jsp">Удалить группы</a></li>
-			<li id="rateLink"><a href="${pageContext.request.contextPath}/rateTable.jsp">Рейтинг</a></li>
-			<li id="backLink"><a href="${pageContext.request.contextPath}/Protected/Cabinet.jsp">Кабинет</a></li>
+		<ul class="zeroStyle">
+			<li id="addLink" class="link"><a href="${pageContext.request.contextPath}/Protected/addGroup.jsp">Создать группу</a></li>
+			<li id="joinLink" class="link"><a href="${pageContext.request.contextPath}/Protected/joinGroup.jsp">Присоединиться</a></li>
+			<li id="signoutLink" class="link"><a href="${pageContext.request.contextPath}/Protected/signoutGroup.jsp">Выйти из групп</a></li>
+			<li id="archiveLink" class="link"><a href="${pageContext.request.contextPath}/Protected/archiveGroup.jsp">Архив группы</a></li>
+			<li id="deleteLink" class="link"><a href="${pageContext.request.contextPath}/Protected/deleteGroup.jsp">Удалить группы</a></li>
+			<li id="rateLink" class="link"><a href="${pageContext.request.contextPath}/rateTable.jsp">Рейтинг</a></li>
+			<li id="backLink" class="link"><a href="${pageContext.request.contextPath}/Protected/Cabinet.jsp">Кабинет</a></li>
 		</ul>
 	</c:otherwise>
 </c:choose>	
