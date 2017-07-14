@@ -14,22 +14,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ru.aim.dbmodels.DBManager;
+import ru.aim.modelmanagers.WebAimGroupManager;
 import ru.aim.modelmanagers.WebAimManager;
 import ru.aim.models.WebAim;
+import ru.aim.models.WebCollector;
+import ru.aim.models.WebGroup;
 import ru.aim.models.WebUser;
 
 
 /**
- * Servlet implementation class AchievedAim
+ * Servlet implementation class DeleteAim
  */
-@WebServlet("/Protected/doneAim.do")
-public class AchievedAim extends HttpServlet {
+@WebServlet("/Protected/failedAim.do")
+public class FailedAim extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AchievedAim() {
+    public FailedAim() {
         super();
     }
 
@@ -44,30 +47,26 @@ public class AchievedAim extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		request.setCharacterEncoding("UTF-8");
+		//add an aim
 		
+		request.setCharacterEncoding("UTF-8");
+
 		int userId = Integer.parseInt(request.getParameter("userId"));
 		String name = request.getParameter("nameOfAim");
 		String description = request.getParameter("description");
-		
-					
 		String baseURL = getServletContext().getInitParameter("baseURL");
 		
 		try
 		{
-			
 			if (getServletContext().getAttribute("AimDBManager") != null)
 			{
 				DBManager dbm = (DBManager)getServletContext().getAttribute("AimDBManager");
 				WebAimManager wam = new WebAimManager();
 				
-				boolean aimArchived = wam.markAsAchieved(dbm, userId, name, description);
-				
+				boolean aimArchived = wam.markAsFailed(dbm, userId, name, description);
 				if(!aimArchived) {
 					response.sendRedirect(baseURL + "/errorHandler.jsp");
 				}
-				
 				//now because we have modeled correctly, we can easily refresh data here, 
 				//rather than redirecting around to do so!
 				ArrayList<WebAim> allAims = wam.getUserAimsByDeadline(dbm, userId);
@@ -77,27 +76,19 @@ public class AchievedAim extends HttpServlet {
 				HttpSession s = request.getSession();
 				s.setAttribute("aimData", allAims);
 				s.setAttribute("archiveAimData", archiveAims);
-				
-				
-				
-				//take the view back to the aim list
-		
+						
 				response.setContentType("text/plain");
 				response.setCharacterEncoding("UTF-8");
-				response.getWriter().write("done");
-				
-				String congrats = "Ajax";
-				request.setAttribute("success", congrats);
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/Protected/updateSessionData.do");
-				rd.forward(request, response);
-				return;
-				
+				response.getWriter().write("failed");
+				return;		
 			}
 			else
 			{
 				//log it... and throw new Exception ("No database connection.");
 				response.sendRedirect(baseURL + "/errorHandler.jsp");
 			}
+			
+			
 		}
 		catch (Exception ex)
 		{

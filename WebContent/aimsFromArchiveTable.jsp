@@ -33,7 +33,7 @@
 					<td>${aim.deadline}</td>
 					<td><c:choose>
 							<c:when test="${aim.result}">Выполнено</c:when>
-							<c:otherwise>Не выполнено</c:otherwise>
+							<c:otherwise>Не получилось</c:otherwise>
 						</c:choose></td>
 
 				</tr>

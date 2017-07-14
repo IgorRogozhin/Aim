@@ -136,6 +136,17 @@ public class DBAimQueries {
 
 		return String.format("UPDATE users SET solved=solved+1 " + "WHERE id='%d' ", userId);
 	}
+	
+	/**
+	 * UPDATE users SET failed=failed+1...
+	 * 
+	 * @param userId
+	 * @return String
+	 */
+	public static String markAsFailed(int userId) {
+
+		return String.format("UPDATE users SET failed=failed+1 " + "WHERE id='%d' ", userId);
+	}
 
 	/**
 	 * UPDATE user_aim SET result=1...

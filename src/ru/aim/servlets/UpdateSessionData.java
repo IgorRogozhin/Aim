@@ -55,6 +55,7 @@ public class UpdateSessionData extends HttpServlet {
 		
 		String congrats = (String) request.getAttribute("success");		
 		String baseURL = getServletContext().getInitParameter("baseURL");
+		String stayOnPage = "Ajax";
 		
 		try
 		{
@@ -121,7 +122,12 @@ public class UpdateSessionData extends HttpServlet {
 						s.setAttribute("rateUsersInGroup", groupsRate);
 					}
 					}
-				
+				if( congrats.compareTo(stayOnPage) == 0 ) {
+					response.setContentType("text/plain");
+					response.setCharacterEncoding("UTF-8");
+					response.getWriter().write("done");
+					return;	
+				}
 				request.setAttribute("success", congrats);
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/Protected/Cabinet.jsp");
 				rd.forward(request, response);

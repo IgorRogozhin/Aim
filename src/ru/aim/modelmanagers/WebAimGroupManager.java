@@ -108,7 +108,9 @@ public class WebAimGroupManager implements Serializable {
 				collector.getWebAim().setDescription(rs.getString("description"));
 				collector.getWebAim().setControl(rs.getString("control"));
 				collector.getWebAim().setArchive(rs.getBoolean("archive"));
+				collector.getWebAim().setResult(rs.getBoolean("result"));
 				collector.getWebGroup().setName(rs.getString("name_group"));
+				
 				try {
 					deadline = rs.getObject("deadline", LocalDate.class);
 				} catch (Exception e) {
